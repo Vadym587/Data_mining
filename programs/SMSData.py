@@ -35,8 +35,8 @@ if __name__ == '__main__':
                         if word not in stop_words:
                             spam_array[porter.stem(word)] = spam_array.setdefault(porter.stem(word), 0) + 1
 
-        ham_array = dict(sorted(ham_array.items(), key=lambda item: len(item[0]), reverse=True))
-        spam_array = dict(sorted(spam_array.items(), key=lambda item: len(item[0]), reverse=True))
+        ham_array = dict(sorted(ham_array.items(), key=lambda item: len(item[0])))
+        spam_array = dict(sorted(spam_array.items(), key=lambda item: len(item[0])))
         str_arrays.append(ham_array)
         str_arrays.append(spam_array)
 
@@ -65,87 +65,74 @@ if __name__ == '__main__':
                 writer.writerow([key, value])
 
     # Calculating total average length of all words
-
-    average_length = 0
-    total_sum_length = 0
-    words_amount = 0
-
-    with open('sms-spam-dictionary.csv', 'r') as dictionary:
-        reader = csv.reader(dictionary)
-        for line in reader:
-            if line[0] != 'word':
-                total_sum_length += len(line[0]) * int(line[1].replace('\n', ''))
-                words_amount += int(line[1].replace('\n', ''))
-
-    with open('sms-ham-dictionary.csv', 'r') as dictionary:
-        reader = csv.reader(dictionary)
-        for line in reader:
-            if line[0] != 'word':
-                total_sum_length += len(line[0]) * int(line[1].replace('\n', ''))
-                words_amount += int(line[1].replace('\n', ''))
-
-    average_length = total_sum_length / words_amount
-
     # Creating plot with normalized words lengths and average length
 
-    all_words = pd.read_csv('sms-all-words.csv')
-    hams = all_words[all_words.type == 'ham']
-    spams = all_words[all_words.type == 'spam']
+    average_length = 0
+    words_amount = sum(1 for line in open('sms-all-words.csv'))
+    hams_lengths = {}
+    spams_lengths = {}
+
+    with open('sms-all-words.csv', 'r') as all_words:
+        reader = csv.reader(all_words)
+        total_sum_length = 0
+        for line in reader:
+            total_sum_length += len(line[1])
+            if line[0] == 'ham':
+                hams_lengths[len(line[1])] = hams_lengths.setdefault(len(line[1]), 0) + 1
+            elif line[0] == 'spam':
+                spams_lengths[len(line[1])] = spams_lengths.setdefault(len(line[1]), 0) + 1
+        average_length = total_sum_length / words_amount
+
+    for key in hams_lengths.keys():
+        hams_lengths[key] /= words_amount
+    for key in spams_lengths.keys():
+        spams_lengths[key] /= words_amount
 
     pylab.subplot(2, 2, 1)
-
-    pylab.plot(range(len(hams)), hams.length / total_sum_length)
-    pylab.plot(range(len(spams)), spams.length / total_sum_length)
-    pylab.plot(range(len(hams)), hams.length * 0 + average_length / total_sum_length)
+    pylab.bar(range(len(hams_lengths)), width=0.2, height=hams_lengths.values())
+    pylab.bar(range(len(spams_lengths)), width=0.2, height=spams_lengths.values())
+    pylab.bar(average_length, width=0.2, height=max(hams_lengths.values()), color='red')
     pylab.title('Words lengths')
-    pylab.ylabel("length")
+    pylab.ylabel('Number of words with length')
     pylab.legend(['ham', 'spam', 'average'])
 
     # Getting ham and spam messages
     # and creating arrays of normalized messages lengths
     # and calculating average length of all messages
 
-    all_messages = pd.read_csv('sms-spam-corpus.csv', encoding='ISO-8859-1')
-    ham_messages = all_messages[all_messages.v1 == 'ham']
-    spam_messages = all_messages[all_messages.v1 == 'spam']
-    ham_messages_lengths = [len(m) for m in ham_messages.v2]
-    spam_messages_lengths = [len(m) for m in spam_messages.v2]
-    ham_messages_lengths = sorted(ham_messages_lengths, reverse=True)
-    spam_messages_lengths = sorted(spam_messages_lengths, reverse=True)
-    average_message_length = 0
-    total_messages_length = 0
-    number_of_messages = len(ham_messages) + len(spam_messages)
+    average_messages_length = 0
+    messages_amount = sum(1 for line in open('sms-spam-corpus.csv', encoding='ISO-8859-1'))
+    ham_messages_lengths = {}
+    spam_messages_lengths = {}
 
-    for length in ham_messages_lengths:
-        total_messages_length += length
+    with open('sms-spam-corpus.csv', 'r', encoding='ISO-8859-1') as all_messages:
+        reader = csv.reader(all_messages)
+        total_sum_length = 0
+        for line in reader:
+            total_sum_length += len(line[1])
+            if line[0] == 'ham':
+                ham_messages_lengths[len(line[1])] = ham_messages_lengths.setdefault(len(line[1]), 0) + 1
+            elif line[0] == 'spam':
+                spam_messages_lengths[len(line[1])] = spam_messages_lengths.setdefault(len(line[1]), 0) + 1
+        average_messages_length = total_sum_length / messages_amount
 
-    for length in spam_messages_lengths:
-        total_messages_length += length
-
-    for i, length in enumerate(ham_messages_lengths):
-        ham_messages_lengths[i] = length / total_messages_length
-
-    for i, length in enumerate(spam_messages_lengths):
-        spam_messages_lengths[i] = length / total_messages_length
-
-    average_message_length = total_messages_length / number_of_messages
-
-    # Creating plot with normalized messages lengths and average length
-
-    x = np.linspace(0, len(ham_messages), len(ham_messages))
+    for key in ham_messages_lengths.keys():
+        ham_messages_lengths[key] /= messages_amount
+    for key in spam_messages_lengths.keys():
+        spam_messages_lengths[key] /= messages_amount
 
     pylab.subplot(2, 2, 2)
-    pylab.plot(range(len(ham_messages)), ham_messages_lengths)
-    pylab.plot(range(len(spam_messages)), spam_messages_lengths)
-    pylab.plot(x, x * 0 + average_message_length / total_messages_length)
+    pylab.bar(range(len(ham_messages_lengths)), width=1, height=ham_messages_lengths.values())
+    pylab.bar(range(len(spam_messages_lengths)), width=1, height=spam_messages_lengths.values())
+    pylab.bar(average_messages_length, width=1, height=max(ham_messages_lengths.values()), color='red')
     pylab.title('Messages lengths')
-    pylab.ylabel("length")
+    pylab.ylabel('Number of messages with length')
     pylab.legend(['ham', 'spam', 'average'])
 
     ham_dictionary = pd.read_csv('sms-ham-dictionary.csv', header=None, index_col=0, squeeze=True).to_dict()
     ham_dictionary = sorted(ham_dictionary.items(), key=lambda item: int(item[1]), reverse=True)
     most_frequent_ham_words = list(ham_dictionary)[:20]
-    most_frequent_ham_words_dict = {x[0]: x[1] for x in most_frequent_ham_words}
+    most_frequent_ham_words_dict = {x[0]: int(x[1]) / len(ham_dictionary) for x in most_frequent_ham_words}
     most_frequent_ham_words_dict = dict(sorted(most_frequent_ham_words_dict.items(), key=lambda item: item[1]))
 
     pylab.subplot(2, 2, 3)
@@ -157,8 +144,9 @@ if __name__ == '__main__':
     spam_dictionary = pd.read_csv('sms-spam-dictionary.csv', header=None, index_col=0, squeeze=True).to_dict()
     spam_dictionary = sorted(spam_dictionary.items(), key=lambda item: int(item[1]), reverse=True)
     most_frequent_spam_words = list(spam_dictionary)[:20]
-    most_frequent_spam_words_dict = {x[0]: x[1] for x in most_frequent_spam_words}
-    most_frequent_spam_words_dict = dict(sorted(most_frequent_spam_words_dict.items(), key=lambda item: item[1], reverse=True))
+    most_frequent_ham_words = sorted(most_frequent_ham_words_dict, )
+    most_frequent_spam_words_dict = {x[0]: int(x[1]) / len(spam_dictionary) for x in most_frequent_spam_words}
+    most_frequent_spam_words_dict = dict(sorted(most_frequent_spam_words_dict.items(), key=lambda item: item[1]))
 
     pylab.subplot(2, 2, 4)
     pylab.bar(range(len(most_frequent_spam_words_dict)), height=most_frequent_spam_words_dict.values(), color='orange')
