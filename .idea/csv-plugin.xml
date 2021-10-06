@@ -3,35 +3,42 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\programs\countries.csv">
+        <entry key="\programs\bayes_method\sms-ham-dictionary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\programs\sms-all-words.csv">
+        <entry key="\programs\bayes_method\sms-spam-corpus.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\programs\sms-ham-dictionary.csv">
+        <entry key="\programs\bayes_method\sms-spam-dictionary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\programs\sms-spam-corpus.csv">
+        <entry key="\programs\countries\countries.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\programs\sms-spam-dictionary.csv">
+        <entry key="\programs\freqency_length_ham_spam\sms-all-words.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\programs\freqency_length_ham_spam\sms-ham-dictionary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
