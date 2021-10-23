@@ -63,14 +63,24 @@ if __name__ == '__main__':
 
         colors = []
         for i in range(int(number_of_clusters.get())):
-            colors.append((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+            colors.append([random.random(), random.random(), random.random()])
 
         figure1 = plt.Figure()
         scatter1 = FigureCanvasTkAgg(figure1, master)
         scatter1.get_tk_widget().grid(column=3, row=2)
         ax1 = figure1.add_subplot(111)
 
+        array_of_lists_of_points = []
+        for i in range(int(number_of_clusters.get())):
+            array_of_lists_of_points.append({})
+
         centroids = {int(k): int(v) for k, v in centroids.items()}
+        sums_x = []
+        sums_y = []
+        for i in range(int(number_of_clusters.get())):
+            sums_x.append(0)
+            sums_y.append(0)
+
         for key, value in points_dictionary.items():
             d = math.sqrt(math.pow((int(key) - list(centroids.keys())[0]), 2) + math.pow((int(value) - list(centroids.values())[0]), 2))
             index_of_cluster = 0
@@ -78,8 +88,21 @@ if __name__ == '__main__':
                 d1 = math.sqrt(math.pow((int(key) - list(centroids.keys())[index]), 2) + math.pow((int(value) - list(centroids.values())[index]), 2))
                 if d1 < d:
                     index_of_cluster = index
-            ax1.scatter(int(key), int(value), c=[colors[index_of_cluster]])
+            array_of_lists_of_points[index_of_cluster][key] = value
 
+            sums_x[index_of_cluster] += int(key)
+            sums_y[index_of_cluster] += int(value)
+            average_x = sums_x[index_of_cluster] / len(array_of_lists_of_points[index_of_cluster])
+            average_y = sums_y[index_of_cluster] / len(array_of_lists_of_points[index_of_cluster])
+            centroids[list(centroids.keys())[index_of_cluster]] = average_x
+            centroids[average_y] = centroids[list(centroids.keys())[index_of_cluster]]
+            del centroids[list(centroids.keys())[index_of_cluster]]
+
+        for i in range(int(number_of_clusters.get())):
+            array_of_lists_of_points[i] = {int(k): int(v) for k, v in array_of_lists_of_points[i].items()}
+            ax1.scatter(array_of_lists_of_points[i].keys(), array_of_lists_of_points[i].values(), color=colors[i])
+
+        ax1.scatter(centroids.keys(), centroids.values(), color='r')
         ax1.legend(['points'])
 
 
@@ -113,6 +136,5 @@ if __name__ == '__main__':
     # buttons
     button_for_file.grid(column=2, row=0)
     button_for_words.grid(column=2, row=1)
-
 
     master.mainloop()
