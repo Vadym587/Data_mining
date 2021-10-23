@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f1fa45fa-4a17-47f8-8923-9a475495f504" name="Changes" comment="Complete lab2">
-      <change beforePath="$PROJECT_DIR$/.idea/csv-plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-plugin.xml" afterDir="false" />
+    <list default="true" id="f1fa45fa-4a17-47f8-8923-9a475495f504" name="Changes" comment="Resolve problems for lab2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,14 +47,14 @@
       <recent name="F:\Data_mining\programs\bayes_method" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Data_mining\programs\k-averages_method" />
       <recent name="F:\Data_mining\programs\countries" />
       <recent name="F:\Data_mining\programs\bayes_method" />
       <recent name="F:\Data_mining\programs\freqency_length_ham_spam" />
       <recent name="F:\My_data_\Data_mining\artem" />
-      <recent name="F:\My_data_\Data_mining\programs" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.BayesMethod (1)">
+  <component name="RunManager" selected="Python.KAveragesMethod">
     <configuration name="BayesMethod (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Lab1" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -77,7 +76,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="BayesMethod" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="KAveragesMethod" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Lab1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -85,11 +84,32 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/programs" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/programs/k-averages_method" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="F:\Data_mining\programs\bayes_method\BayesMethod.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/programs/k-averages_method/KAveragesMethod.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SMSData (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Lab1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/programs/freqency_length_ham_spam" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/programs/freqency_length_ham_spam/SMSData.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -148,27 +168,6 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/artem" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="F:\My_data_\Data_mining\artem\main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Lab1" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/programs" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -184,10 +183,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.KAveragesMethod" />
         <item itemvalue="Python.BayesMethod (1)" />
-        <item itemvalue="Python.BayesMethod" />
+        <item itemvalue="Python.SMSData (1)" />
         <item itemvalue="Python.SMSData" />
-        <item itemvalue="Python.main (1)" />
         <item itemvalue="Python.main (1)" />
       </list>
     </recent_temporary>
@@ -222,7 +221,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633174542495</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Resolve problems for lab2">
+      <created>1633501111727</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1633501111727</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -241,6 +247,7 @@
     <MESSAGE value="Complete lab1" />
     <MESSAGE value="Resolve all problems for lab1" />
     <MESSAGE value="Complete lab2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete lab2" />
+    <MESSAGE value="Resolve problems for lab2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Resolve problems for lab2" />
   </component>
 </project>
