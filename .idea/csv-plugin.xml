@@ -3,21 +3,28 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="\programs\bayes_method\sms-ham-dictionary.csv">
+        <entry key="F:\Bayes_method\sms-ham-dictionary.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\programs\bayes_method\sms-spam-corpus.csv">
+        <entry key="\articles.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="\programs\bayes_method\sms-spam-dictionary.csv">
+        <entry key="\articles_redirect.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\articles_template.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -39,6 +46,27 @@
           </value>
         </entry>
         <entry key="\programs\freqency_length_ham_spam\sms-ham-dictionary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\programs\freqency_length_ham_spam\sms-spam-corpus.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\programs\freqency_length_ham_spam\sms-spam-dictionary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\programs\k-averages_method\points.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
